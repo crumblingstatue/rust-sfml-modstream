@@ -1,0 +1,11 @@
+[package]
+name = "sfml-modstream"
+version = "0.1.0"
+authors = ["Mika Attila <radiantstatue@gmail.com>"]
+
+[dependencies.sfml]
+git = "https://github.com/jeremyletang/rust-sfml.git"
+branch = "sound-stream"
+
+[dependencies]
+openmpt-sys = "0.1.0"

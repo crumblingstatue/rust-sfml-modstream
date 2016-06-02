@@ -57,4 +57,10 @@ impl SoundStream for ModStream {
             openmpt_module_set_position_seconds(self.module, offset.as_seconds() as f64);
         }
     }
+    fn sample_rate(&self) -> u32 {
+        44100
+    }
+    fn channel_count(&self) -> u32 {
+        2
+    }
 }

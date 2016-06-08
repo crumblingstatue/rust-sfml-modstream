@@ -13,7 +13,6 @@ use std::fs::File;
 use std::ptr;
 
 pub struct ModStream {
-    _mod_data: Vec<u8>,
     module: *mut openmpt_module,
     buffer: [i16; 2048],
 }
@@ -33,7 +32,6 @@ impl ModStream {
                 panic!("Failed load module");
             }
             Ok(ModStream {
-                _mod_data: buf,
                 module: module,
                 buffer: [0; 2048],
             })

@@ -6,10 +6,10 @@ use openmpt_sys::*;
 use sfml::audio::SoundStream;
 use sfml::system::Time;
 
+use std::fs::File;
 use std::io;
 use std::io::prelude::*;
 use std::path::Path;
-use std::fs::File;
 use std::ptr;
 
 pub struct ModStream {

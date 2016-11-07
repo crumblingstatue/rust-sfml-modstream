@@ -62,3 +62,11 @@ impl SoundStream for ModStream {
         2
     }
 }
+
+impl Drop for ModStream {
+    fn drop(&mut self) {
+        unsafe {
+            openmpt_module_destroy(self.module);
+        }
+    }
+}

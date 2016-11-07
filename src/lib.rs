@@ -37,6 +37,9 @@ impl ModStream {
             })
         }
     }
+    pub fn get_duration_seconds(&self) -> f64 {
+        unsafe { openmpt_module_get_duration_seconds(self.module) }
+    }
 }
 
 impl SoundStream for ModStream {

@@ -22,9 +22,9 @@ impl fmt::Display for HrTime {
 
 fn play_song(path: &Path) {
     let mut stream = ModStream::load(&path).unwrap();
+    let duration = HrTime { seconds: stream.get_duration_seconds() };
     let mut player = SoundStreamPlayer::new(&mut stream);
     player.play();
-    let duration = HrTime { seconds: stream.get_duration_seconds() };
     let filename = path.file_name().unwrap().to_string_lossy();
     while player.get_status() == SoundStatus::Playing {
         let offset = HrTime { seconds: player.get_playing_offset().as_seconds() as f64 };

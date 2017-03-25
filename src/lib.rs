@@ -32,9 +32,9 @@ impl ModStream {
                 panic!("Failed load module");
             }
             Ok(ModStream {
-                module: module,
-                buffer: [0; 2048],
-            })
+                   module: module,
+                   buffer: [0; 2048],
+               })
         }
     }
     pub fn get_duration_seconds(&self) -> f64 {

@@ -2,6 +2,9 @@
 name = "sfml-modstream"
 version = "0.1.0"
 authors = ["Mika Attila <radiantstatue@gmail.com>"]
+description = "Custom SFML SoundStream for playing modules"
+license = "zlib-acknowledgement"
+repository = "https://github.com/crumblingstatue/rust-sfml-modstream"
 
 [dependencies]
 openmpt-sys = "0.1.0"

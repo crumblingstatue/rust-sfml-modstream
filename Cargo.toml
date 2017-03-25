@@ -5,6 +5,7 @@ authors = ["Mika Attila <radiantstatue@gmail.com>"]
 description = "Custom SFML SoundStream for playing modules"
 license = "zlib-acknowledgement"
 repository = "https://github.com/crumblingstatue/rust-sfml-modstream"
+keywords = ["sfml", "mod", "module", "music"]
 
 [dependencies]
 openmpt-sys = "0.1.0"

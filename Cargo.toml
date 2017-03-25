@@ -3,8 +3,6 @@ name = "sfml-modstream"
 version = "0.1.0"
 authors = ["Mika Attila <radiantstatue@gmail.com>"]
 
-[dependencies.sfml]
-git = "https://github.com/jeremyletang/rust-sfml.git"
-
 [dependencies]
 openmpt-sys = "0.1.0"
+sfml = "0.12"

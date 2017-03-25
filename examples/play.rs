@@ -26,8 +26,8 @@ fn play_song(path: &Path) {
     let mut player = SoundStreamPlayer::new(&mut stream);
     player.play();
     let filename = path.file_name().unwrap().to_string_lossy();
-    while player.get_status() == SoundStatus::Playing {
-        let offset = HrTime { seconds: player.get_playing_offset().as_seconds() as f64 };
+    while player.status() == SoundStatus::Playing {
+        let offset = HrTime { seconds: player.playing_offset().as_seconds() as f64 };
         print!("Playing {}: {}/{}\r", filename, offset, duration);
         let _ = std::io::stdout().flush();
         std::thread::sleep(std::time::Duration::from_millis(100));

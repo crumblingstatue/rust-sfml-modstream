@@ -9,4 +9,8 @@ keywords = ["sfml", "mod", "module", "music"]
 
 [dependencies]
 openmpt-sys = "0.1.0"
-sfml = "0.12"
+
+[dependencies.sfml]
+version = "0.12"
+default-features = false
+features = ["audio"]

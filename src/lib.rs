@@ -23,18 +23,20 @@ impl ModStream {
         let mut buf = Vec::new();
         file.read_to_end(&mut buf)?;
         unsafe {
-            let module = openmpt_module_create_from_memory(buf.as_ptr() as *const _,
-                                                           buf.len(),
-                                                           None,
-                                                           ptr::null_mut(),
-                                                           ptr::null());
+            let module = openmpt_module_create_from_memory(
+                buf.as_ptr() as *const _,
+                buf.len(),
+                None,
+                ptr::null_mut(),
+                ptr::null(),
+            );
             if module.is_null() {
                 panic!("Failed load module");
             }
             Ok(ModStream {
-                   module: module,
-                   buffer: [0; 2048],
-               })
+                module: module,
+                buffer: [0; 2048],
+            })
         }
     }
     pub fn get_duration_seconds(&self) -> f64 {
@@ -45,11 +47,12 @@ impl ModStream {
 impl SoundStream for ModStream {
     fn get_data(&mut self) -> (&mut [i16], bool) {
         unsafe {
-            let keep_playing = openmpt_module_read_interleaved_stereo(self.module,
-                                                                      44100,
-                                                                      1024,
-                                                                      self.buffer.as_mut_ptr()) !=
-                               0;
+            let keep_playing = openmpt_module_read_interleaved_stereo(
+                self.module,
+                44100,
+                1024,
+                self.buffer.as_mut_ptr(),
+            ) != 0;
             (&mut self.buffer[..], keep_playing)
         }
     }

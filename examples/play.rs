@@ -13,10 +13,12 @@ struct HrTime {
 
 impl fmt::Display for HrTime {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f,
-               "{:02.0}:{:04.1}",
-               (self.seconds / 60.).floor(),
-               self.seconds % 60.)
+        write!(
+            f,
+            "{:02.0}:{:04.1}",
+            (self.seconds / 60.).floor(),
+            self.seconds % 60.
+        )
     }
 }
 

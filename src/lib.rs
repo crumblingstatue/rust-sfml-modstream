@@ -19,9 +19,9 @@ pub struct ModStream {
 
 impl ModStream {
     pub fn load<P: AsRef<Path>>(path: P) -> Result<Self, io::Error> {
-        let mut file = try!(File::open(path));
+        let mut file = File::open(path)?;
         let mut buf = Vec::new();
-        try!(file.read_to_end(&mut buf));
+        file.read_to_end(&mut buf)?;
         unsafe {
             let module = openmpt_module_create_from_memory(buf.as_ptr() as *const _,
                                                            buf.len(),

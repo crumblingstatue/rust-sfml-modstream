@@ -24,12 +24,16 @@ impl fmt::Display for HrTime {
 
 fn play_song(path: &Path) {
     let mut stream = ModStream::load(&path).unwrap();
-    let duration = HrTime { seconds: stream.get_duration_seconds() };
+    let duration = HrTime {
+        seconds: stream.get_duration_seconds(),
+    };
     let mut player = SoundStreamPlayer::new(&mut stream);
     player.play();
     let filename = path.file_name().unwrap().to_string_lossy();
     while player.status() == SoundStatus::Playing {
-        let offset = HrTime { seconds: player.playing_offset().as_seconds() as f64 };
+        let offset = HrTime {
+            seconds: player.playing_offset().as_seconds() as f64,
+        };
         print!("Playing {}: {}/{}\r", filename, offset, duration);
         let _ = std::io::stdout().flush();
         std::thread::sleep(std::time::Duration::from_millis(100));

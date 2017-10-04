@@ -1,11 +1,9 @@
-extern crate sfml;
 extern crate openmpt_sys;
+extern crate sfml;
 
 use openmpt_sys::*;
-
 use sfml::audio::SoundStream;
 use sfml::system::Time;
-
 use std::fs::File;
 use std::io;
 use std::io::prelude::*;

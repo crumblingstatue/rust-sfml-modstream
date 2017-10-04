@@ -47,7 +47,7 @@ impl SoundStream for ModStream {
         unsafe {
             let keep_playing = openmpt_module_read_interleaved_stereo(
                 self.module,
-                44100,
+                44_100,
                 1024,
                 self.buffer.as_mut_ptr(),
             ) != 0;
@@ -56,11 +56,11 @@ impl SoundStream for ModStream {
     }
     fn seek(&mut self, offset: Time) {
         unsafe {
-            openmpt_module_set_position_seconds(self.module, offset.as_seconds() as f64);
+            openmpt_module_set_position_seconds(self.module, f64::from(offset.as_seconds()));
         }
     }
     fn sample_rate(&self) -> u32 {
-        44100
+        44_100
     }
     fn channel_count(&self) -> u32 {
         2

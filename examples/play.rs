@@ -32,7 +32,7 @@ fn play_song(path: &Path) {
     let filename = path.file_name().unwrap().to_string_lossy();
     while player.status() == SoundStatus::Playing {
         let offset = HrTime {
-            seconds: player.playing_offset().as_seconds() as f64,
+            seconds: f64::from(player.playing_offset().as_seconds()),
         };
         print!("Playing {}: {}/{}\r", filename, offset, duration);
         let _ = std::io::stdout().flush();

@@ -32,7 +32,7 @@ impl ModStream {
                 panic!("Failed load module");
             }
             Ok(ModStream {
-                module: module,
+                module,
                 buffer: [0; 2048],
             })
         }

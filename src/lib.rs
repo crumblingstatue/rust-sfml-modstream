@@ -16,14 +16,17 @@ pub struct ModStream {
 }
 
 impl ModStream {
-    pub fn load<P: AsRef<Path>>(path: P) -> Result<Self, io::Error> {
+    pub fn from_file<P: AsRef<Path>>(path: P) -> Result<Self, io::Error> {
         let mut file = File::open(path)?;
         let mut buf = Vec::new();
         file.read_to_end(&mut buf)?;
+        Ok(Self::from_memory(&buf))
+    }
+    pub fn from_memory(data: &[u8]) -> Self {
         unsafe {
             let module = openmpt_module_create_from_memory(
-                buf.as_ptr() as *const _,
-                buf.len(),
+                data.as_ptr() as *const _,
+                data.len(),
                 None,
                 ptr::null_mut(),
                 ptr::null(),
@@ -31,10 +34,10 @@ impl ModStream {
             if module.is_null() {
                 panic!("Failed load module");
             }
-            Ok(ModStream {
+            Self {
                 module,
                 buffer: [0; 2048],
-            })
+            }
         }
     }
     pub fn get_duration_seconds(&self) -> f64 {

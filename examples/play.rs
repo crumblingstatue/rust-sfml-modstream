@@ -23,7 +23,7 @@ impl fmt::Display for HrTime {
 }
 
 fn play_song(path: &Path) {
-    let mut stream = ModStream::load(&path).unwrap();
+    let mut stream = ModStream::from_file(&path).unwrap();
     let duration = HrTime {
         seconds: stream.get_duration_seconds(),
     };

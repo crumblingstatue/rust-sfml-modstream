@@ -1,6 +1,7 @@
 extern crate openmpt_sys;
 extern crate sfml;
 
+use crate::string::OpenMptString;
 use openmpt_sys::*;
 use sfml::audio::SoundStream;
 use sfml::system::Time;
@@ -9,6 +10,8 @@ use std::io;
 use std::io::prelude::*;
 use std::path::Path;
 use std::ptr;
+
+mod string;
 
 pub struct ModStream {
     module: *mut openmpt_module,
@@ -42,6 +45,41 @@ impl ModStream {
     }
     pub fn get_duration_seconds(&self) -> f64 {
         unsafe { openmpt_module_get_duration_seconds(self.module) }
+    }
+    pub fn metadata<'a, K: Key<'a>>(&self, key: K) -> Option<OpenMptString> {
+        let key = std::ffi::CString::new(key.to_str()).unwrap();
+        let ret = unsafe { openmpt_module_get_metadata(self.module, key.as_ptr()) };
+        OpenMptString::new(ret)
+    }
+}
+
+pub trait Key<'a> {
+    fn to_str(self) -> &'a str;
+}
+
+impl<'a> Key<'a> for &'a str {
+    fn to_str(self) -> &'a str {
+        self
+    }
+}
+
+pub enum Metadata {
+    Tracker,
+    Artist,
+    Title,
+    Date,
+    Message,
+}
+
+impl Key<'static> for Metadata {
+    fn to_str(self) -> &'static str {
+        match self {
+            Self::Tracker => "tracker",
+            Self::Artist => "artist",
+            Self::Title => "title",
+            Self::Date => "date",
+            Self::Message => "message",
+        }
     }
 }
 

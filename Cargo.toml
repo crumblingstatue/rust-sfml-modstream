@@ -11,6 +11,6 @@ keywords = ["sfml", "mod", "module", "music"]
 openmpt-sys = "0.1.0"
 
 [dependencies.sfml]
-git = "https://github.com/jeremyletang/rust-sfml.git"
+version = "0.16.0"
 default-features = false
 features = ["audio"]

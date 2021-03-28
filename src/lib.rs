@@ -47,18 +47,18 @@ impl ModStream {
         unsafe { openmpt_module_get_duration_seconds(self.module) }
     }
     pub fn metadata<'a, K: Key<'a>>(&self, key: K) -> Option<OpenMptString> {
-        let key = std::ffi::CString::new(key.to_str()).unwrap();
+        let key = std::ffi::CString::new(key.into_str()).unwrap();
         let ret = unsafe { openmpt_module_get_metadata(self.module, key.as_ptr()) };
         OpenMptString::new(ret)
     }
 }
 
 pub trait Key<'a> {
-    fn to_str(self) -> &'a str;
+    fn into_str(self) -> &'a str;
 }
 
 impl<'a> Key<'a> for &'a str {
-    fn to_str(self) -> &'a str {
+    fn into_str(self) -> &'a str {
         self
     }
 }
@@ -72,7 +72,7 @@ pub enum Metadata {
 }
 
 impl Key<'static> for Metadata {
-    fn to_str(self) -> &'static str {
+    fn into_str(self) -> &'static str {
         match self {
             Self::Tracker => "tracker",
             Self::Artist => "artist",

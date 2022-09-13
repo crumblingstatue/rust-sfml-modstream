@@ -49,7 +49,7 @@ impl<'a> std::fmt::Display for OptStrFmt<'a> {
 }
 
 fn play_song(path: &Path) {
-    let mut stream = ModStream::from_file(&path).unwrap();
+    let mut stream = ModStream::from_file(path).unwrap();
     let duration = HrTime {
         seconds: stream.get_duration_seconds(),
     };
